@@ -38,7 +38,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/"
-                  className="text-slate-600 hover:text-orange-600 transition"
+                  className="text-slate-600 hover:text-blue-600 transition"
                 >
                   Home
                 </Link>
@@ -46,7 +46,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/about"
-                  className="text-slate-600 hover:text-orange-600 transition"
+                  className="text-slate-600 hover:text-blue-600 transition"
                 >
                   About Us
                 </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/contact"
-                  className="text-slate-600 hover:text-orange-600 transition"
+                  className="text-slate-600 hover:text-blue-600 transition"
                 >
                   Contact Us
                 </Link>
@@ -62,7 +62,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/privacy"
-                  className="text-slate-600 hover:text-orange-600 transition"
+                  className="text-slate-600 hover:text-blue-600 transition"
                 >
                   Privacy Policy
                 </Link>
@@ -107,7 +107,7 @@ const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-orange-600 transition"
+                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-blue-600 transition"
               >
                 <FaFacebookF />
               </a>
@@ -115,7 +115,7 @@ const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-orange-600 transition"
+                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-blue-600 transition"
               >
                 <FaInstagram />
               </a>
@@ -123,7 +123,7 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-orange-600 transition"
+                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-blue-600 transition"
               >
                 <FaTwitter />
               </a>
@@ -131,7 +131,7 @@ const Footer = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-orange-600 transition"
+                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-blue-600 transition"
               >
                 <FaLinkedinIn />
               </a>
@@ -139,7 +139,7 @@ const Footer = () => {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-orange-600 transition"
+                className="p-2 bg-slate-100 rounded-full text-slate-500 hover:text-white hover:bg-blue-600 transition"
               >
                 <FaYoutube />
               </a>

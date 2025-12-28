@@ -70,7 +70,8 @@ const Navbar = () => {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search City, property type, budget..."
-                className="w-56 lg:w-72 rounded-full border border-gray-200 pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-blue-500"
+                className="w-56 lg:w-72 rounded-full border border-gray-200 pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:border-blue-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]
+                focus:shadow-[0_0_20px_rgba(59,130,246,0.7)]"
               />
             </form>
             <Link
