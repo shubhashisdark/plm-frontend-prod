@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import Navbar from "../Layout/Navbar";
 
 /* Images must be inside /public */
 const SLIDER_IMAGES = [
@@ -22,8 +23,9 @@ const SigninPage = () => {
   const [role, setRole] = useState("Customer");
 
   return (
+    
     <div className="min-h-screen bg-gradient-to-br` from-blue-50 to-white">
-
+         <Navbar />
       {/* ================= LEFT SLIDER (DESKTOP ONLY) ================= */}
       <div className="hidden lg:block fixed inset-y-0 left-0 w-1/2 h-screen">
         <Swiper

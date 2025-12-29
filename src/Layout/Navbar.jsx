@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FiMenu, FiX, FiSearch } from 'react-icons/fi'
 import { useState } from 'react'
+import BuyPage from '../pages/Buy.jsx'
+
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -44,19 +46,19 @@ const Navbar = () => {
             <NavLink to="/" className={navLinkClass}>
               Home
             </NavLink>
-            <NavLink to="/buy" className={navLinkClass}>
+            <NavLink to="/Buy" className={navLinkClass}>
               Buy
             </NavLink>
-            <NavLink to="/rent" className={navLinkClass}>
+            <NavLink to="/Rent" className={navLinkClass}>
               Rent
             </NavLink>
-            <NavLink to="/sell" className={navLinkClass}>
+            <NavLink to="/Sell" className={navLinkClass}>
               Sell
             </NavLink>
-            <NavLink to="/about" className={navLinkClass}>
+            <NavLink to="/About" className={navLinkClass}>
               About Us
             </NavLink>
-            <NavLink to="/contact" className={navLinkClass}>
+            <NavLink to="/Contact" className={navLinkClass}>
               Contact
             </NavLink>
           </nav>
@@ -120,35 +122,35 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 onClick={() => setOpen(false)}
-                to="/buy"
+                to="/Buy"
                 className={navLinkClass}
               >
                 Buy
               </NavLink>
               <NavLink
                 onClick={() => setOpen(false)}
-                to="/rent"
+                to="/Sell"
                 className={navLinkClass}
               >
                 Rent
               </NavLink>
               <NavLink
                 onClick={() => setOpen(false)}
-                to="/sell"
+                to="/Rent"
                 className={navLinkClass}
               >
                 Sell
               </NavLink>
               <NavLink
                 onClick={() => setOpen(false)}
-                to="/about"
+                to="/About"
                 className={navLinkClass}
               >
                 About Us
               </NavLink>
               <NavLink
                 onClick={() => setOpen(false)}
-                to="/contact"
+                to="/Contact"
                 className={navLinkClass}
               >
                 Contact
@@ -156,7 +158,7 @@ const Navbar = () => {
             </nav>
 
             <Link
-              to="/signin"
+              to="/Signin"
               onClick={() => setOpen(false)}
               className="inline-flex w-full items-center justify-center rounded-md border border-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:border-blue-500 hover:text-blue-600 transition"
             >
