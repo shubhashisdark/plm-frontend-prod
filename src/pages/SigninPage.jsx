@@ -51,7 +51,7 @@ const SigninPage = () => {
                     Your Property <br /> Journey Starts Here
                   </h1>
 
-                  <p className="mt-4 text-base text-blue-100 max-w-md">
+                  <p className="mt-4 text-base text-blue-500 max-w-md">
                     Buy, rent & sell verified properties with confidence.
                   </p>
 
