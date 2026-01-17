@@ -35,9 +35,11 @@ const SigninPage = () => {
   const [loading, setLoading] = useState(false);
 
   // ================= GOOGLE LOGIN =================
-  const googleLogin = () => {
-    window.location.href = "http://localhost:5000/api/auth/google";
-  };
+ const googleLogin = () => {
+  window.location.href =
+    `${import.meta.env.VITE_API_BASE_URL}/api/auth/google`;
+};
+
 
   // ================= SEND OTP =================
   const sendOTP = async () => {
