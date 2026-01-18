@@ -42,7 +42,7 @@ const OAuthSuccess = () => {
             navigate("/agent");
             break;
           default:
-            navigate("/Dashboard");
+            navigate("/dashboard");
         }
       })
       .catch((err) => {
