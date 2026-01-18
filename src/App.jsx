@@ -9,8 +9,11 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import SigninPage from './pages/SigninPage'
 import OAuthSuccess from "./pages/OAuthSuccess.jsx";
-// import Dashboard from "./pages/Dashboard.jsx";
-
+import Dashboard from "./pages/Dashboard.jsx";
+import AgentDashboard from "./pages/AgentDashboard.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import Unauthorized from "./pages/Unauthorized.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 
 const App = () => {
@@ -27,6 +30,35 @@ const App = () => {
         <Route path="/Contact" element={<Contact />} />
         <Route path='/Signin' element={<SigninPage />} />
         <Route path="/oauth-success" element={<OAuthSuccess />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["Customer"]}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Agent */}
+        <Route
+          path="/agent"
+          element={
+            <ProtectedRoute allowedRoles={["Agent"]}>
+              <AgentDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Admin */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       </BrowserRouter>
     </div>                                                                                                              
