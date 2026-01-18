@@ -10,35 +10,44 @@ const OAuthSuccess = () => {
     const token = params.get("token");
 
     if (!token) {
-      navigate("/signin");
+      navigate("/Signin");
       return;
     }
 
-    // 1️⃣ Save token
+    // Save token
     localStorage.setItem("accessToken", token);
 
-    // 2️⃣ Fetch logged-in user (CRITICAL STEP)
+    // Fetch user
     API.get("/auth/me")
       .then((res) => {
-        console.log("AUTH ME RESPONSE:", res.data);
+        console.log("FULL /auth/me RESPONSE:", res.data);
 
-        const user = res.data.user;
+        // ✅ THIS IS THE ONLY CORRECT LINE
+        const user = res.data?.data?.user;
 
-        // 3️⃣ Save user (THIS WAS MISSING)
+        if (!user) {
+          throw new Error("User missing in response");
+        }
+
+        console.log("USER OBJECT:", user);
+
         localStorage.setItem("user", JSON.stringify(user));
 
-        // 4️⃣ Role-based redirect
-        if (user.role === "Admin") {
-          navigate("/admin");
-        } else if (user.role === "Agent") {
-          navigate("/agent");
-        } else {
-          navigate("/dashboard");
+        // Role based redirect
+        switch (user.role) {
+          case "Admin":
+            navigate("/admin");
+            break;
+          case "Agent":
+            navigate("/agent");
+            break;
+          default:
+            navigate("/dashboard");
         }
       })
       .catch((err) => {
-        console.error("AUTH ME FAILED", err);
-        navigate("/signin");
+        console.error("AUTH ME FAILED:", err);
+        navigate("/Signin");
       });
 
     // Clean URL
