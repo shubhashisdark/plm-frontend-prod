@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Simple slider images (put in /public)
+// Images must be inside /public
 const SLIDER_IMAGES = [
   "/property1.jpg",
   "/property2.jpg",
@@ -27,109 +27,123 @@ const Dashboard = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
-    }, 3000);
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      
-      {/* ===== HEADER ===== */}
-      <div className="bg-white shadow p-6 flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">
-            Welcome back, {user.fullName} 👋
-          </h1>
-          <p className="text-sm text-gray-500">
-            Role: <span className="font-semibold">{user.role}</span>
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
 
-        <button
-          onClick={() => {
-            localStorage.clear();
-            navigate("/signin");
-          }}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
+      {/* ===== HEADER ===== */}
+      <div className="sticky top-0 z-50 backdrop-blur bg-white/70 shadow-md">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800">
+              Welcome back, {user.fullName} 👋
+            </h1>
+            <p className="text-sm text-gray-500">
+              Role: <span className="font-semibold text-indigo-600">{user.role}</span>
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              localStorage.clear();
+              navigate("/signin");
+            }}
+            className="bg-red-500 hover:bg-red-600 transition text-white px-4 py-2 rounded-lg shadow"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* ===== SLIDER ===== */}
-      <div className="relative h-64 overflow-hidden">
-        <img
-          src={SLIDER_IMAGES[slide]}
-          alt="Property"
-          className="w-full h-full object-cover transition-all duration-700"
-        />
-        <div className="absolute bottom-4 left-4 bg-black/60 text-white px-4 py-2 rounded">
-          Find your dream property 🏡
+      <div className="relative h-72 overflow-hidden rounded-b-3xl shadow-lg">
+        {SLIDER_IMAGES.map((img, index) => (
+          <img
+            key={img}
+            src={img}
+            alt="Property"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              slide === index ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute bottom-6 left-6 text-white">
+          <h2 className="text-2xl font-bold">Find your dream property 🏡</h2>
+          <p className="text-sm text-gray-200">
+            Buy • Rent • Invest with confidence
+          </p>
         </div>
       </div>
 
       {/* ===== DASHBOARD BODY ===== */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 px-6 py-8">
 
-        {/* ===== LEFT MENU ===== */}
-        <div className="bg-white rounded-xl shadow p-4 space-y-3">
-          <MenuItem label="Dashboard" />
-          <MenuItem label="My Profile" />
-          <MenuItem label="Search Properties" />
-          <MenuItem label="Saved Properties ❤️" />
-          <MenuItem label="My Enquiries" />
-          <MenuItem label="Bookings / Visits" />
-          <MenuItem label="Notifications 🔔" />
-          <MenuItem label="Reviews ⭐" />
-          <MenuItem label="Help & Support" />
+        {/* ===== SIDEBAR ===== */}
+        <div className="bg-white/80 backdrop-blur rounded-2xl shadow-lg p-5 space-y-4 h-fit sticky top-28">
+          <SidebarItem label="Dashboard" />
+          <SidebarItem label="My Profile" />
+          <SidebarItem label="Search Properties" />
+          <SidebarItem label="Saved Properties ❤️" />
+          <SidebarItem label="My Enquiries" />
+          <SidebarItem label="Bookings / Visits" />
+          <SidebarItem label="Notifications 🔔" />
+          <SidebarItem label="Reviews ⭐" />
+          <SidebarItem label="Help & Support" />
         </div>
 
         {/* ===== MAIN CONTENT ===== */}
         <div className="lg:col-span-3 space-y-6">
 
           {/* ACCOUNT STATUS */}
-          <Card title="Account Status">
+          <Card title="Account Status" accent="blue">
             <Status label="Email Verified" value={user.isEmailVerified} />
             <Status label="Phone Verified" value={user.isPhoneVerified} />
-            <p className="text-sm text-gray-500">
-              Last Login: {user.lastLogin ? new Date(user.lastLogin).toLocaleString() : "—"}
+            <p className="text-xs text-gray-500 mt-2">
+              Last Login:{" "}
+              {user.lastLogin
+                ? new Date(user.lastLogin).toLocaleString()
+                : "—"}
             </p>
           </Card>
 
           {/* PROFILE */}
-          <Card title="My Profile">
+          <Card title="My Profile" accent="indigo">
             <ProfileRow label="Full Name" value={user.fullName} />
             <ProfileRow label="Email" value={user.email} />
             <ProfileRow label="Phone" value={user.phone || "Not added"} />
-            <button className="mt-3 text-blue-600 text-sm">
+            <button className="mt-4 text-indigo-600 text-sm font-medium hover:underline">
               Edit Profile
             </button>
           </Card>
 
-          {/* PROPERTY BROWSING */}
-          <Card title="Search Properties">
+          {/* SEARCH */}
+          <Card title="Search Properties" accent="emerald">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <Input placeholder="Buy / Rent" />
               <Input placeholder="City" />
               <Input placeholder="Price Range" />
               <Input placeholder="BHK / Type" />
             </div>
-            <button className="mt-4 bg-blue-600 text-white px-5 py-2 rounded">
+            <button className="mt-4 bg-emerald-600 hover:bg-emerald-700 transition text-white px-6 py-2 rounded-lg shadow">
               Search
             </button>
           </Card>
 
           {/* WISHLIST */}
-          <Card title="Saved Properties ❤️">
+          <Card title="Saved Properties ❤️" accent="rose">
             <p className="text-gray-500 text-sm">
               You have no saved properties yet.
             </p>
           </Card>
 
           {/* ENQUIRIES */}
-          <Card title="My Enquiries">
+          <Card title="My Enquiries" accent="amber">
             <p className="text-gray-500 text-sm">
               No enquiries yet. Start exploring properties!
             </p>
@@ -145,27 +159,40 @@ export default Dashboard;
 
 /* ================= COMPONENTS ================= */
 
-const MenuItem = ({ label }) => (
-  <div className="cursor-pointer text-gray-700 hover:text-blue-600">
+const SidebarItem = ({ label }) => (
+  <div className="cursor-pointer px-3 py-2 rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition">
     {label}
   </div>
 );
 
-const Card = ({ title, children }) => (
-  <div className="bg-white rounded-xl shadow p-5">
-    <h2 className="font-semibold text-lg mb-3">{title}</h2>
-    {children}
-  </div>
-);
+const Card = ({ title, accent = "blue", children }) => {
+  const accentMap = {
+    blue: "border-blue-500",
+    indigo: "border-indigo-500",
+    emerald: "border-emerald-500",
+    rose: "border-rose-500",
+    amber: "border-amber-500",
+  };
+
+  return (
+    <div className={`bg-white rounded-2xl shadow-lg p-6 border-l-4 ${accentMap[accent]}`}>
+      <h2 className="font-bold text-lg mb-4 text-gray-800">{title}</h2>
+      {children}
+    </div>
+  );
+};
 
 const Status = ({ label, value }) => (
   <p className="text-sm">
-    {label}: {value ? "✅" : "❌"}
+    {label}:{" "}
+    <span className={value ? "text-green-600" : "text-red-500"}>
+      {value ? "Verified ✅" : "Not Verified ❌"}
+    </span>
   </p>
 );
 
 const ProfileRow = ({ label, value }) => (
-  <p className="text-sm">
+  <p className="text-sm text-gray-700">
     <strong>{label}:</strong> {value}
   </p>
 );
@@ -173,6 +200,6 @@ const ProfileRow = ({ label, value }) => (
 const Input = (props) => (
   <input
     {...props}
-    className="border rounded px-3 py-2 text-sm w-full"
+    className="border rounded-lg px-3 py-2 text-sm w-full focus:ring-2 focus:ring-indigo-400 outline-none"
   />
 );
