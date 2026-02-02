@@ -36,9 +36,11 @@ const SigninPage = () => {
 
   // ================= GOOGLE LOGIN =================
  const googleLogin = () => {
-  window.location.href =
-    `${import.meta.env.VITE_API_BASE_URL}/api/auth/google`;
-};
+   // Pass current frontend URL to backend to ensure it redirects back correctly after OAuth
+   const currentFrontendUrl = window.location.origin;
+   window.location.href =
+     `${import.meta.env.VITE_API_BASE_URL}/api/auth/google?frontend=${encodeURIComponent(currentFrontendUrl)}`;
+ };
 
 
   // ================= SEND OTP =================
@@ -77,8 +79,36 @@ const SigninPage = () => {
         otp,
       });
 
+      // Save token
       localStorage.setItem("accessToken", res.data.data.accessToken);
-      navigate("/dashboard");
+
+      // Fetch user details and save to localStorage (match OAuth flow)
+      try {
+        const meRes = await API.get("/auth/me");
+        const user = meRes.data?.data?.user;
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+
+          // Role-based redirect
+          switch (user.role) {
+            case "Admin":
+              navigate("/admin");
+              break;
+            case "Agent":
+              navigate("/agent");
+              break;
+            default:
+              navigate("/dashboard");
+          }
+        } else {
+          // Fallback: go to dashboard if user missing
+          navigate("/dashboard");
+        }
+      } catch (err) {
+        // If fetching user fails, navigate to signin to force fresh auth
+        alert("Failed to fetch user after verification. Please sign in again.");
+        navigate("/signin");
+      }
     } catch (err) {
       alert(err.response?.data?.message || "Invalid OTP");
     } finally {
@@ -190,7 +220,7 @@ const SigninPage = () => {
           )}
 
           {/* Phone */}
-          <Input icon={<FiPhone />} placeholder="+91 8480******" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <Input icon={<FiPhone />} placeholder=" 8480******" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
           {/* Action Button */}
           <button

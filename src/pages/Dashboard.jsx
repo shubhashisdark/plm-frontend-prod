@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Layout/Navbar";
+
 
 /* Images must exist in /public folder */
 const SLIDER_IMAGES = [
@@ -91,7 +93,7 @@ const Dashboard = () => {
             Find your dream property 🏡
           </h2>
           <p className="text-xs sm:text-sm text-gray-200">
-            Buy • Rent • Invest with confidence
+            Buy • Rent • Invest with confidence and ease to ease.
           </p>
         </div>
       </div>
